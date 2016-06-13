@@ -30,6 +30,23 @@ $(document).ready(function(){
         });
 
         console.table("input object x " + inputObject.x + " input object y " + inputObject.y + " operation: " + operation);
+        sendObject (inputObject);
   });
+
+  function sendObject ( objectToSend ){
+    console.table('in sendObject: ' + objectToSend.operation);
+    $.ajax({
+      type: "POST",
+      url: "/calcNow" ,
+      data: objectToSend,
+      success: function(data) {
+        console.log("success: " + data);
+      },//end success
+      error: function()
+      {
+        console.log('error connecting..');
+      }//end error
+    });
+  }
 
 });
